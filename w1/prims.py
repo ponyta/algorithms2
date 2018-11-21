@@ -101,16 +101,6 @@ X[e.v] = True
 tmp_edges = []
 while X_card < numV:
     e = heap.extractMin() # extract the next minimal edge
-    # check if it is valid
-    # either e is both in X: we definitely cannot include e in the MST
-    # or e crosses the cut (X, V-X), in which case it is the minimal cut and must belong to the MST
-    # finally, e is both in (V-X), which means that given the cut where A is e.u U V and e.v is in B,
-    # e is the minimal edge crossing such cut.
-    # if not X[e.u] and not X[e.v]:
-    #     X[e.u] = True
-    #     X[e.v] = True
-    #     X_card += 2
-    #     min_span_tree_cost += e.val # add the edge to the MST
     if X[e.u] != X[e.v]:
         X[e.u] = True
         X[e.v] = True
@@ -121,6 +111,5 @@ while X_card < numV:
         tmp_edges = []
     else:
         tmp_edges.append(e)
-    # else do nothing (ignore this edge as it does not belong to the MSG
 
 print "The minimum spanning tree cost is:", min_span_tree_cost
