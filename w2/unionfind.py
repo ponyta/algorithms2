@@ -65,13 +65,13 @@ def main():
     edges.sort()
     numClusters = numNodes
     for e in edges:
-        print e.cost
-        if numClusters <= 4: # we are done
-            largestDist = e.cost
-            print largestDist
-            break
         node1 = nodes[e.u-1]
         node2 = nodes[e.v-1]
+        if numClusters <= 4: # we are done
+            if node1.find() is not node2.find():
+                largestDist = e.cost
+                print largestDist
+                break
         if node1.find() is not node2.find(): # if they are not in the same cluster
             numClusters -= 1
             node1.union(node2) # union them together
@@ -83,3 +83,14 @@ def main():
 
 
 main()
+
+nodes = ["sonja", "chun", "max", "michelle"]
+nodes = map(lambda x: Node(x), nodes)
+nodes[0].union(nodes[1])
+nodes[1].union(nodes[2])
+
+for n in nodes:
+    print n.find()
+
+print nodes[0].find() is nodes[1].find()
+print nodes[2].find() is not nodes[3].find()
